@@ -2,6 +2,7 @@ import os
 
 class Produtos:
 
+    #O correto é __init__, com dois "_" antes e depois.
     def _init_(self, nome, valor, quantidade):
         self.nomeproduto = nome
         self.valorproduto = valor
@@ -10,8 +11,12 @@ class Produtos:
 
 class SistemaCadastroProduto:
 
+    # ERRO: o correto é __init__, com dois "_" antes e depois.
     def _init_(self):
-        self.arquivo = r"c:\Users\User\Desktop\Empresa+ Produtos"
+
+        # TROQUE AQUI:
+        # O arquivo vai ser criado na mesma pasta do programa.
+        self.arquivo = "produtos.txt"
 
     def cadastrarproduto(self):
 
@@ -20,7 +25,7 @@ class SistemaCadastroProduto:
         while True:
 
             while True:
-
+        #Está entrando números no nome, arrume
                 nomeproduto = input("Digite o nome do produto: ").strip()
 
                 if nomeproduto == "":
@@ -32,12 +37,14 @@ class SistemaCadastroProduto:
 
                 try:
 
+                    #Troque "a valor" por "o valor".
                     valorproduto = float(input("\nDigite a valor do produto: "))
 
                     if valorproduto < 0:
-                        print("\nValor invalido")
+                        print("\nValor inválido")
                     else:
                         break
+
                 except ValueError:
                     print("\nDigite apenas números")
 
@@ -45,29 +52,32 @@ class SistemaCadastroProduto:
 
                 try:
 
-                    quantidadeproduto = int(input("\nDigite a quantidade de produtos: "))
+                    quantidadeproduto = int(
+                        input("\nDigite a quantidade de produtos: ")
+                    )
 
                     if quantidadeproduto < 0:
-                        print("\nQuantidade invalida")
+                        print("\nQuantidade inválida")
                     else:
                         break
+
                 except ValueError:
-                    print("\nDigite apenas numeros")
-                
-            
+                    print("\nDigite apenas números")
+
             produto = Produtos(nomeproduto, valorproduto, quantidadeproduto)
 
             with open(self.arquivo, "a", encoding="utf-8") as arquivo:
 
                 arquivo.write(
-                    f"Produto: {produto.nomeproduto} |"
-                    f"Valor: {produto.valorproduto}R$ |"
+                    f"Produto: {produto.nomeproduto} | "
+                    f"Valor: R$ {produto.valorproduto:.2f} | "
                     f"Estoque: {produto.quantidadeproduto} |\n"
-                    )
+                )
 
             print("\nProduto cadastrado com sucesso!\n")
 
             break
+
 
 SCP = SistemaCadastroProduto()
 
